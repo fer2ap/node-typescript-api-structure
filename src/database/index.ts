@@ -2,12 +2,12 @@ import Mongoose from 'mongoose';
 
 let database: Mongoose.Connection;
 
-export const connect = () => {
-  const localUri = 'mongodb://localhost:27017/teste';
+export const connect = async () => {
+  const localUri = 'mongodb://127.0.0.1:27017/test';
   if (database) {
     return;
   }
-  Mongoose.connect(localUri, {
+  await Mongoose.connect(localUri, {
     useNewUrlParser: true,
     useFindAndModify: true,
     useUnifiedTopology: true,
