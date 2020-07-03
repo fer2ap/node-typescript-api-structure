@@ -12,6 +12,10 @@ export const connect = async () => {
     useFindAndModify: true,
     useUnifiedTopology: true,
     useCreateIndex: true
+  }).then(() => {
+    console.log('MongoDB connected');
+  }, () => {
+    console.log('MongoDB failled to connect');
   });
   database = Mongoose.connection;
   database.once('open', async () => {

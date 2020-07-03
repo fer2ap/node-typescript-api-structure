@@ -1,19 +1,19 @@
-import { createSchema, Type } from 'ts-mongoose';
 import { setLastUpdated, sameName } from '@models/users/users.methods';
 import { findOneOrCreate, findByName } from '@models/users/users.statics';
+import { Schema } from 'mongoose';
 
-const UserSchema = createSchema({
-  name: Type.string({ required: true }),
-  email: Type.string({ required: true, unique: true, index: true, lowercase: true }),
-  password: Type.string({ required: true, select: false }),
-  createdAt: Type.date({ default: new Date() }),
-  lastUpdate: Type.date({ default: Date.now })
+const UserSchema = new Schema({
+  name: { type: String, required: true },
+  email: { type: String, required: true, index: { unique: true }, lowercase: true },
+  password: { type: String, required: true, select: false },
+  createdAt: { type: String, default: new Date() },
+  lastUpdate: { type: String, default: new Date() }
 });
 
-UserSchema.statics.setLastUpdated = setLastUpdated;
-UserSchema.statics.sameName = sameName;
+UserSchema.methods.setLastUpdated = setLastUpdated;
+UserSchema.methods.sameName = sameName;
 
-UserSchema.methods.findOneOrCreate = findOneOrCreate;
-UserSchema.methods.findByName = findByName;
+UserSchema.statics.findOneOrCreate = findOneOrCreate;
+UserSchema.statics.findByName = findByName;
 
 export default UserSchema;

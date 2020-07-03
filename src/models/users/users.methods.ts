@@ -1,4 +1,6 @@
+// eslint-disable-next-line no-unused-vars
 import { Document } from 'mongoose';
+// eslint-disable-next-line no-unused-vars
 import { IUserDocument } from './users.types';
 
 export async function setLastUpdated (

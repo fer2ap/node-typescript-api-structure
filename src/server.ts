@@ -1,23 +1,24 @@
-import bodyParser from 'body-parser';
 import express from 'express';
 import { connect } from './database';
 import { createDummyData } from './scripts/createDummyData';
+import { usersRouter } from '@models/users/users.router';
 
 (
   async () => {
+    express.json();
     const app: express.Application = express();
     const port = 3000;
-    app.use(bodyParser.json());
-    app.use(bodyParser.urlencoded({ extended: false }));
+    app.use(express.json());
+    app.use(express.urlencoded({ extended: false }));
     await connect();
-    app.get('/', (request, response) => {
-      return response.json({ message: 'Welcome to my nemo api' });
-    });
+    usersRouter(app);
     app.get('/createDummyData', (request, response) => {
       createDummyData();
       return response.json({ message: 'Dummy data created' });
     });
-
+    app.get('/', (request, response) => {
+      return response.json({ message: 'Welcome to my nemo api' });
+    });
     app.listen(port, () => {
       console.log(`Server started on http://localhost:${port}`);
     });

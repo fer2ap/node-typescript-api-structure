@@ -1,6 +1,7 @@
+// eslint-disable-next-line no-unused-vars
 import { Document, Model } from 'mongoose';
 
-export interface IUser {
+export interface IUserDocument extends Document{
   name: string;
   email: string;
   password: string;
@@ -8,13 +9,13 @@ export interface IUser {
   lastUpdate?: Date;
 }
 
-export interface IUserDocument extends IUser, Document{
-  setLastUpdated: (this: IUserDocument) => Promise<void>;
-  sameName: (this: IUserDocument) => Promise<Document[]>;
+export interface IUser extends IUserDocument{
+  setLastUpdated(this: IUserDocument): Promise<void>;
+  sameName(this: IUserDocument): Promise<Document[]>;
 }
 
-export interface IUserModel extends Model<IUserDocument>{
-  findOneOrCreate: (
+export interface IUserModel extends Model<IUser>{
+  findOneOrCreate(
     this: IUserModel,
     {
       name,
@@ -23,9 +24,9 @@ export interface IUserModel extends Model<IUserDocument>{
       name: string,
       email: string
     }
-  ) => Promise<IUserDocument>;
-  findByName: (
+  ): Promise<IUserDocument>;
+  findByName(
     this: IUserModel,
     name: string
-  ) => Promise<IUserDocument[]>;
+  ): Promise<IUserDocument[]>;
 }
