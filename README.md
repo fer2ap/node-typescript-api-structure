@@ -1,14 +1,18 @@
 # node-express-mongodb NEMo api
-Node.js, ESLint, TypeScript, Jest &amp, Babel + Express, MongoDB
+Node.js, ESLint, TypeScript, Jest &amp, Babel + Express, Mongoose
 
 Objetctive:
-Rocketseat provided the repo with the basic structure to run a node app using typescript and node.
-In order to create an web app, it is missing express config and a local connection to a database.
-To help the comunity and all the web dev starting their own project, I'll implement on this repo:
- 
- - Express app
- - MongoDB connection
- - User Collection with basic auth using JWT
- - Additional collection, other than User.
- 
-Node.js, ESLint, TypeScript, Jest &amp, Babel + Express, MongoDB
+
+Rocketseat provided the base repo with the basic structure to run a node app using typescript and node.
+
+However, it is also needed to configure an express app and a local connection to a database to create a functional web app based on this stack.
+
+I hope web developers starting their first learning journey on TypeScript and anyone interested in a using TS for their own Web Services can take benefit from this project.
+
+The main tasks to be done are:
+
+ - Configure an Express app;
+ - Implement MongoDB connection;
+ - Implement Mongoose with the Types and Interfaces required by Typescript;
+ - Authentication for the User Collection using JWT
+ - Implement an additional collection, other than User to keep as an exemple.
