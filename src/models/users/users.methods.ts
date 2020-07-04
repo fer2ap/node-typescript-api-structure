@@ -1,7 +1,8 @@
 // eslint-disable-next-line no-unused-vars
-import { Document } from 'mongoose';
+import { Document, HookNextFunction } from 'mongoose';
 // eslint-disable-next-line no-unused-vars
 import { IUserDocument } from './users.types';
+import { hash } from 'bcryptjs';
 
 export async function setLastUpdated (
   this: IUserDocument
@@ -17,4 +18,9 @@ export async function sameName (
   this: IUserDocument
 ): Promise<Document[]> {
   return this.model('user').find({ name: this.name });
+}
+
+export async function hashPassword (this: IUserDocument, next: HookNextFunction): Promise<void> {
+  this.password = await hash(this.password, 10);
+  next();
 }

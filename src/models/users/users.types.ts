@@ -1,5 +1,5 @@
 // eslint-disable-next-line no-unused-vars
-import { Document, Model } from 'mongoose';
+import { Document, HookNextFunction, Model } from 'mongoose';
 
 export interface IUserDocument extends Document{
   name: string;
@@ -12,6 +12,7 @@ export interface IUserDocument extends Document{
 export interface IUser extends IUserDocument{
   setLastUpdated(this: IUserDocument): Promise<void>;
   sameName(this: IUserDocument): Promise<Document[]>;
+  hashPassword(this: IUserDocument, next: HookNextFunction): Promise<void>;
 }
 
 export interface IUserModel extends Model<IUser>{

@@ -12,15 +12,12 @@ export function usersRouter (app: Application): void {
   });
   router.post('/register', async (request: Request, response: Response): Promise<Response> => {
     try {
-      const { name, email } = request.body;
-      const user = await UserModel.findOneOrCreate({
-        name,
-        email
-      });
+      const { name, email, password } = request.body;
+      const user = await UserModel.create({ name, email, password });
       user.password = undefined;
       return response.send(user);
     } catch (error) {
-      return response.status(400).send('Error creating an user.');
+      return response.status(400).send('Error creating an user. Email already registered.');
     }
   });
   app.use('/auth', router);

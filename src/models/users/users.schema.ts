@@ -1,4 +1,4 @@
-import { setLastUpdated, sameName } from '@models/users/users.methods';
+import { setLastUpdated, sameName, hashPassword } from '@models/users/users.methods';
 import { findOneOrCreate, findByName } from '@models/users/users.statics';
 import { Schema } from 'mongoose';
 
@@ -15,5 +15,7 @@ UserSchema.methods.sameName = sameName;
 
 UserSchema.statics.findOneOrCreate = findOneOrCreate;
 UserSchema.statics.findByName = findByName;
+
+UserSchema.pre('save', hashPassword);
 
 export default UserSchema;

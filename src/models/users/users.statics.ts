@@ -1,8 +1,7 @@
 // eslint-disable-next-line no-unused-vars
 import { IUserDocument, IUserModel } from '@models/users/users.types';
 
-export async function findOneOrCreate (
-  this: IUserModel,
+export async function findOneOrCreate (this: IUserModel,
   {
     name,
     email
