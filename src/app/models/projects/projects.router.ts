@@ -6,9 +6,8 @@ import { IAuthMiddlewareRequest } from '../../@types/IAuthMiddlewareRequest';
 
 export function projectsRouter (app: Application): void {
   const router = Router();
-  router.get('/', async (request: IAuthMiddlewareRequest, response: Response): Promise<Response> => {
+  router.get('/', authMiddleware, async (request: IAuthMiddlewareRequest, response: Response): Promise<Response> => {
     return response.send({ message: 'Projects index', userId: request.userId });
   });
-  app.use(authMiddleware);
   app.use('/projects', router);
 }

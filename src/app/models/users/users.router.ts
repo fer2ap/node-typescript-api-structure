@@ -6,6 +6,9 @@ import { IUser } from '@models/users/users.types';
 import { compare } from 'bcryptjs';
 import { sign } from 'jsonwebtoken';
 import { auth } from '@config/auth';
+import { randomBytes } from 'crypto';
+import { mailer } from '../../../modules/mailer';
+import path from 'path';
 
 function generateToken (user: IUser): String {
   return sign({ id: user.id }, auth.secret, {
@@ -42,6 +45,41 @@ export function usersRouter (app: Application): void {
     user.password = undefined;
     const token = generateToken(user);
     return response.status(200).send({ user, token });
+  });
+  router.post('/forgot_password', async (request:Request, response: Response): Promise<Response> => {
+    const { email } = request.body;
+    try {
+      const user = await UserModel.findOne({ email });
+      if (!user) {
+        response.status(400).send({ error: 'Error on forgot password. User not found.' });
+      }
+      const token = randomBytes(20).toString('hex');
+      const now = new Date();
+      now.setHours(now.getHours() + 1);
+      await UserModel.findByIdAndUpdate(user.id, {
+        $set: {
+          passwordResetToken: token,
+          passwordResetTokenExpires: now
+        }
+      });
+      // @ts-ignore
+      await mailer.sendMail({
+        to: email,
+        from: 'fernandoADM@gmail.com',
+        template: 'auth/forgot_password',
+        context: { token }
+      }, (error) => {
+        if (error) {
+          console.log(error);
+          return response.status(400).send({ error: 'Couldnt send email with password recovery token' });
+        }
+        else {
+          response.send({ message: 'Email for password recevery sent.' });
+        }
+      });
+    } catch (error) {
+      response.status(400).send({ error: 'Error on forgot password. Try again.' });
+    }
   });
   app.use('/auth', router);
 }

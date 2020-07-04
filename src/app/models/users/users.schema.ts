@@ -6,6 +6,8 @@ const UserSchema = new Schema({
   name: { type: String, required: true },
   email: { type: String, required: true, index: { unique: true }, lowercase: true },
   password: { type: String, required: true, select: false },
+  passwordResetToken: { type: String, select: false },
+  passwordResetTokenExpires: { type: Date, select: false },
   createdAt: { type: String, default: new Date() },
   lastUpdate: { type: String, default: new Date() }
 });
