@@ -16,3 +16,17 @@ The main tasks to be done are:
  - Implement Mongoose with the Types and Interfaces required by Typescript;
  - Authentication for the User Collection using JWT
  - Implement an additional collection, other than User to keep as an exemple.
+
+
+Running this project locally:
+
+ - Setup: Access to a MongoDB at local or remote;
+ - Start your MongoDB
+ - run "yarn install"
+ - run "yarn dev"
+ - Open your localhost
+ 
+ Troubleshooting: 
+ 
+ - If the connection to mongo was done and you have no response at localhost, make sure you are at the correct port.
+ You can always change the exposed port on server.ts. 

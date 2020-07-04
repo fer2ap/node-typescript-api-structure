@@ -39,10 +39,12 @@
   "dependencies": {
     "@types/bcryptjs": "^2.4.2",
     "@types/body-parser": "^1.19.0",
+    "@types/jsonwebtoken": "^8.5.0",
     "@types/mongoose": "^5.7.29",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
     "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.9.20",
     "ts-mongoose": "^0.0.21"
   }

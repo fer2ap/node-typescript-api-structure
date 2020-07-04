@@ -2,6 +2,7 @@ import express from 'express';
 import { connect } from './database';
 import { createDummyData } from './scripts/createDummyData';
 import { usersRouter } from '@models/users/users.router';
+import { projectsRouter } from '@models/projects/projects.router';
 
 (
   async () => {
@@ -12,6 +13,7 @@ import { usersRouter } from '@models/users/users.router';
     app.use(express.urlencoded({ extended: false }));
     await connect();
     usersRouter(app);
+    projectsRouter(app);
     app.get('/createDummyData', (request, response) => {
       createDummyData();
       return response.json({ message: 'Dummy data created' });
