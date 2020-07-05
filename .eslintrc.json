@@ -16,6 +16,11 @@
         "@typescript-eslint"
     ],
     "rules": {
-        "semi": [2, "always"]
+        "semi": [2, "always"],
+        "indent": ["error", "tab"],
+        "no-tabs": "off",
+        "no-trailing-spaces": "off",
+        "no-unused-vars": "off",
+        "array-bracket-spacing": [2, "always"]
     }
 }
