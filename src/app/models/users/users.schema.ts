@@ -12,12 +12,12 @@ const UserSchema = new Schema({
   lastUpdate: { type: String, default: new Date() }
 });
 
-UserSchema.methods.setLastUpdated = setLastUpdated;
 UserSchema.methods.sameName = sameName;
 
 UserSchema.statics.findOneOrCreate = findOneOrCreate;
 UserSchema.statics.findByName = findByName;
 
 UserSchema.pre('save', hashPassword);
+UserSchema.pre('update', setLastUpdated);
 
 export default UserSchema;
